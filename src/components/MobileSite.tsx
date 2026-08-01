@@ -198,7 +198,7 @@ function Frame67() {
 
 function Frame34() {
   return (
-    <div className="[word-break:break-word] content-stretch flex flex-col gap-[4px] items-start not-italic relative shrink-0 w-[197px]">
+    <div className="[word-break:break-word] content-stretch flex flex-col gap-[4px] items-start min-w-0 not-italic relative shrink w-full">
       <p className="font-['IBM_Plex_Sans_Thai:Bold',sans-serif] leading-[normal] relative shrink-0 text-[#ff6d00] text-[14px] w-full">ฝากถอนออโต้</p>
       <div className="font-['IBM_Plex_Sans_Thai:Medium',sans-serif] leading-[0] relative shrink-0 text-[10px] text-white w-full">
         <p className="leading-[normal] mb-0">ฝาก-ถอน ออโต้ 3 วินาที</p>
@@ -210,7 +210,10 @@ function Frame34() {
 
 function Frame59() {
   return (
-    <div className="col-1 content-stretch flex gap-[8px] h-[57.705px] items-center ml-[33.89px] mt-[14.43px] relative row-1 w-[205.5px]">
+    /* Width is the 274px badge minus this row's own offset and a right inset
+       that clears the plate's angled corner, so the copy wraps inside the
+       artwork instead of running past its edge. */
+    <div className="col-1 content-stretch flex gap-[8px] items-center h-[57.705px] ml-[33.89px] mt-[14.43px] relative row-1 w-[226px]">
       <div className="relative shrink-0 size-[80px]">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <img alt="" className="absolute h-[157.58%] left-[-183.37%] max-w-none top-[-22.78%] w-[288.89%]" src={imgRectangle6509} />
@@ -247,7 +250,7 @@ function Group251() {
 
 function Frame35() {
   return (
-    <div className="[word-break:break-word] content-stretch flex flex-col gap-[4px] items-start leading-[normal] not-italic relative shrink-0 w-[197px]">
+    <div className="[word-break:break-word] content-stretch flex flex-col gap-[4px] items-start leading-[normal] min-w-0 not-italic relative shrink w-full">
       <p className="font-['IBM_Plex_Sans_Thai:Bold',sans-serif] relative shrink-0 text-[#ff6d00] text-[14px] w-full">บริการ 24 ชม.</p>
       <p className="font-['IBM_Plex_Sans_Thai:Medium',sans-serif] relative shrink-0 text-[10px] text-white w-full">พร้อมให้บริการตลอด 24 ชั่วโมง รับรองความปลอดภัย</p>
     </div>
@@ -256,7 +259,7 @@ function Frame35() {
 
 function Frame60() {
   return (
-    <div className="col-1 content-stretch flex gap-[8px] h-[57.705px] items-center ml-[26.68px] mt-[14.43px] relative row-1 w-[219.921px]">
+    <div className="col-1 content-stretch flex gap-[8px] items-center h-[57.705px] ml-[26.68px] mt-[14.43px] relative row-1 w-[233px]">
       <div className="relative shrink-0 size-[80px]">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <img alt="" className="absolute h-[157.58%] left-[-6.66%] max-w-none top-[-28.87%] w-[288.89%]" src={imgRectangle6509} />
@@ -293,16 +296,16 @@ function Group252() {
 
 function Frame36() {
   return (
-    <div className="[word-break:break-word] content-stretch flex flex-col gap-[4px] items-start leading-[normal] not-italic relative shrink-0 w-[220px]">
-      <p className="font-['IBM_Plex_Sans_Thai:Bold',sans-serif] min-w-full relative shrink-0 text-[#ff6d00] text-[14px] w-[min-content]">ถอนไม่จำกัด</p>
-      <p className="font-['IBM_Plex_Sans_Thai:Medium',sans-serif] relative shrink-0 text-[10px] text-white w-[221px]">ถอนได้ไม่จำกัดต่อวันรวดเร็วทันใจ</p>
+    <div className="[word-break:break-word] content-stretch flex flex-col gap-[4px] items-start leading-[normal] min-w-0 not-italic relative shrink w-full">
+      <p className="font-['IBM_Plex_Sans_Thai:Bold',sans-serif] relative shrink-0 text-[#ff6d00] text-[14px] w-full">ถอนไม่จำกัด</p>
+      <p className="font-['IBM_Plex_Sans_Thai:Medium',sans-serif] relative shrink-0 text-[10px] text-white w-full">ถอนได้ไม่จำกัดต่อวันรวดเร็วทันใจ</p>
     </div>
   );
 }
 
 function Frame61() {
   return (
-    <div className="col-1 content-stretch flex gap-[8px] h-[57.705px] items-center ml-[22.35px] mt-[15.87px] relative row-1 w-[228.574px]">
+    <div className="col-1 content-stretch flex gap-[8px] items-center h-[57.705px] ml-[22.35px] mt-[15.87px] relative row-1 w-[237px]">
       <div className="relative shrink-0 size-[80px]">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <img alt="" className="absolute h-[191.19%] left-[-125.41%] max-w-none top-[-45%] w-[350.52%]" src={imgRectangle6509} />

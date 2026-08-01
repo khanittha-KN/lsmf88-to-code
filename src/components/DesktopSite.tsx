@@ -17141,7 +17141,9 @@ function Frame40() {
   const onGridClick = useGameGridClick();
   return (
     <div
-      className="anim-fade col-1 content-stretch flex flex-col gap-[32px] items-start ml-[352px] mt-[85px] relative row-1 w-[896.978px]"
+      /* mt matches Frame27's pt-[52px] so the first tile row lines up with the
+         top of the category rail beside it. */
+      className="anim-fade col-1 content-stretch flex flex-col gap-[32px] items-start ml-[352px] mt-[52px] relative row-1 w-[896.978px]"
       key={category}
       onClick={onGridClick}
     >

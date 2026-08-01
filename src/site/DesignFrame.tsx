@@ -28,6 +28,38 @@ export default function DesignFrame({ designWidth, designHeight, maxScale = 1.3,
   const [scale, setScale] = useState(1)
   const [height, setHeight] = useState(designHeight)
 
+  /**
+   * Bottom-most edge of the frame's real content, in design units.
+   *
+   * Two traps make the obvious `scrollHeight` read wrong here. The canvas
+   * carries an explicit `height`, so its own `scrollHeight` is floored by that
+   * height and can only ever ratchet upward — and the page background is an
+   * `inset-0` layer sized *by* the canvas, so it stretches to whatever it is
+   * measured against. Collapsing to `auto` first breaks that feedback loop.
+   * Then `scrollHeight` counts transformed boxes, so entrance animations that
+   * park their element a few pixels low inflate the result until every reveal
+   * has fired; walking layout offsets instead ignores transforms entirely.
+   *
+   * The collapsed frame's own `offsetHeight` is the floor: it is 0 for a frame
+   * sized by the canvas, and its authored height for one that declares its own
+   * (mobile), which must not be shrunk below.
+   */
+  const measureContent = () => {
+    const node = inner.current
+    const frame = node?.firstElementChild
+    if (!node || !(frame instanceof HTMLElement)) return 0
+
+    const previous = node.style.height
+    node.style.height = 'auto'
+    let bottom = frame.offsetHeight
+    for (const child of frame.children) {
+      if (!(child instanceof HTMLElement)) continue
+      bottom = Math.max(bottom, child.offsetTop + child.offsetHeight)
+    }
+    node.style.height = previous
+    return bottom
+  }
+
   useLayoutEffect(() => {
     const measure = () => {
       const available = outer.current?.clientWidth ?? designWidth
@@ -35,10 +67,8 @@ export default function DesignFrame({ designWidth, designHeight, maxScale = 1.3,
       // boundaries, which defeats axis-aligned bounding-box measurement.
       const next = Math.min(available / designWidth, maxScale)
       setScale(Math.round(next * 1000) / 1000)
-      // Absolutely positioned children still contribute to scrollHeight, so a
-      // frame that grew past its authored bounds is never cut off.
-      const measured = inner.current?.scrollHeight ?? 0
-      setHeight(Math.max(designHeight, measured))
+      const measured = measureContent()
+      setHeight(measured > 0 ? measured : designHeight)
     }
     measure()
 
@@ -55,8 +85,8 @@ export default function DesignFrame({ designWidth, designHeight, maxScale = 1.3,
   // Late-loading imagery can change the intrinsic height; re-measure once idle.
   useEffect(() => {
     const id = window.setTimeout(() => {
-      const measured = inner.current?.scrollHeight ?? 0
-      setHeight((current) => Math.max(current, measured))
+      const measured = measureContent()
+      if (measured > 0) setHeight(measured)
     }, 900)
     return () => window.clearTimeout(id)
   }, [designHeight])
