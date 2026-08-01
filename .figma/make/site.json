@@ -1,0 +1,10 @@
+{
+  "description": "Transform Figma designs into responsive, pixel-perfect websites with animations and interactive prototypes, enhancing user engagement and design fidelity.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

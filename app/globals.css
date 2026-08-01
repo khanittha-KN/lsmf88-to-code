@@ -1,0 +1,503 @@
+@import './fonts.css';
+@import 'tailwindcss';
+
+@theme {
+  --font-sans:
+    'IBM Plex Sans Thai', 'Noto Sans Thai', ui-sans-serif, system-ui, sans-serif;
+  --color-ember-50: #fff3ea;
+  --color-ember-300: #ff8a3d;
+  --color-ember-400: #ff6d00;
+  --color-ember-500: #ff5500;
+  --color-ember-600: #c64302;
+  --color-ember-700: #b01f02;
+  --color-ash-900: #0a0704;
+  --color-ash-950: #050302;
+}
+
+html {
+  background-color: #050302;
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+body {
+  margin: 0;
+  background-color: #050302;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: rgba(255, 85, 0, 0.35);
+  color: #fff3ea;
+}
+
+/* Scrollbars stay out of the way until the page is actually being scrolled. */
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+html.is-scrolling {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 85, 0, 0.6) transparent;
+}
+html.is-scrolling::-webkit-scrollbar {
+  width: 8px;
+}
+html.is-scrolling::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff5500, #b01f02);
+  border-radius: 999px;
+}
+
+/* ── Scroll reveal ─────────────────────────────────────────────────────────
+   Applied to elements tagged data-reveal inside the imported design trees.
+   Only opacity/translate change, so the Figma layout is never displaced. */
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-reveal='left'] {
+  transform: translate3d(-34px, 0, 0);
+}
+[data-reveal='right'] {
+  transform: translate3d(34px, 0, 0);
+}
+[data-reveal='zoom'] {
+  transform: scale(0.94);
+}
+/* For nodes whose Figma geometry already relies on a transform, animate opacity
+   only — otherwise the reveal would clobber their positioning transform. */
+[data-reveal='fade'] {
+  transform: none;
+}
+/* Once revealed, the node must be left with no transform and no compositing
+   hint — text measurement walks up the ancestor chain, and a lingering
+   transformed/promoted wrapper makes the glyph box unresolvable. */
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+  filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .anim-float,
+  .anim-drift,
+  .anim-drift-opaque,
+  .anim-glow,
+  .anim-shimmer::after,
+  .anim-spin-slow {
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ── Ambient movement ──────────────────────────────────────────────────── */
+@keyframes ember-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+.anim-float {
+  animation: ember-float 7s ease-in-out infinite;
+}
+
+@keyframes ember-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate3d(2%, -2%, 0) scale(1.04);
+    opacity: 0.68;
+  }
+}
+.anim-drift {
+  animation: ember-drift 16s ease-in-out infinite;
+}
+
+/* Same drift for a background that must stay fully opaque. */
+@keyframes ember-drift-opaque {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2%, -2%, 0) scale(1.04);
+  }
+}
+.anim-drift-opaque {
+  animation: ember-drift-opaque 16s ease-in-out infinite;
+}
+
+@keyframes ember-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(255, 85, 0, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 22px rgba(255, 109, 0, 0.55));
+  }
+}
+.anim-glow {
+  animation: ember-glow 3.6s ease-in-out infinite;
+}
+
+@keyframes ember-sheen {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(320%) skewX(-18deg);
+  }
+}
+.anim-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 240, 220, 0.42),
+    transparent
+  );
+  width: 45%;
+  animation: ember-sheen 4.4s ease-in-out infinite;
+}
+
+@keyframes ember-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.anim-spin-slow {
+  animation: ember-spin 26s linear infinite;
+}
+
+/* ── Interactive affordances layered onto the imported markup ──────────── */
+.hit {
+  cursor: pointer;
+  transition:
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.28s ease;
+}
+.hit:hover {
+  transform: translateY(-2px) scale(1.025);
+  filter: drop-shadow(0 8px 20px rgba(255, 85, 0, 0.4)) brightness(1.06);
+}
+.hit:active {
+  transform: scale(0.97);
+}
+.hit:focus-visible {
+  outline: 2px solid #ff8a3d;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Every card's stroke is the authored `[aria-hidden]` overlay — Figma exported
+   the colours at zero alpha, so they are restored in the markup at their
+   authored widths (2.775px #121525 here). Only the clip, which just the first
+   mobile card carried, is added globally. */
+[data-name='game cover'] {
+  overflow: clip;
+}
+[data-name='game cover'] > [aria-hidden] {
+  transition: filter 0.3s ease;
+}
+[data-name='game cover']:hover > [aria-hidden] {
+  filter: brightness(1.35);
+}
+/* Cards that centre themselves with a transform must keep that translate in
+   their hover transform, or they jump sideways on hover. */
+.tile.-translate-x-1\/2:hover {
+  transform: translateX(-50%) translateY(-8px) scale(1.03);
+}
+.tile.-translate-x-1\/2:active {
+  transform: translateX(-50%) translateY(-2px) scale(0.99);
+}
+/* Provider artwork sits against the top edge of its card, not centred in it. */
+[data-name='game cover'] img {
+  object-position: top center;
+}
+
+/* Stretches an element inside the scaled fixed layer to the viewport edges.
+   The width is divided by the canvas scale because the layer's transform will
+   scale it right back up. */
+.frame-bleed {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: calc(100vw / var(--frame-scale, 1));
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* ── Horizontal rails (mobile badge row) ───────────────────────────────── */
+.rail {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
+.rail > * {
+  scroll-snap-align: center;
+}
+
+.tile {
+  cursor: pointer;
+  transition:
+    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.32s ease;
+}
+.tile:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.6),
+    0 0 0 2px rgba(255, 109, 0, 0.75);
+  z-index: 5;
+}
+.tile:active {
+  transform: translateY(-2px) scale(0.99);
+}
+.tile:focus-visible {
+  outline: 2px solid #ff8a3d;
+  outline-offset: 4px;
+}
+
+/* The three feature badges (auto deposit / 24h service / unlimited withdrawal). */
+.badge {
+  cursor: pointer;
+  transition:
+    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.32s ease;
+}
+.badge:hover {
+  transform: translateY(-5px);
+  filter: brightness(1.12) drop-shadow(0 14px 28px rgba(255, 85, 0, 0.35));
+}
+.badge:hover p:first-of-type {
+  color: #ff8a3d;
+}
+
+/* ── Game category cards ────────────────────────────────────────────────────
+   Figma authored the selected card (`data-size="lg"`) large and the unselected
+   ones small. Each card can now be in either state, so the box resizes and its
+   contents scale by the ratio between the two authored sizes. */
+.cat {
+  cursor: pointer;
+  transition:
+    width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    filter 0.35s ease;
+}
+.cat[aria-selected='false']:hover p,
+.cat[aria-selected='false']:hover img,
+.cat[aria-selected='false']:hover .opacity-50 {
+  opacity: 0.8;
+}
+.cat > *:not([aria-hidden]) {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cat:hover {
+  transform: translateY(-4px);
+  filter: brightness(1.16) drop-shadow(0 10px 24px rgba(255, 85, 0, 0.4));
+}
+/* ── Gradient strokes ──────────────────────────────────────────────────────
+   Figma flattens a gradient stroke to a single zero-alpha colour on export, so
+   it has to be rebuilt: the authored border width is kept but painted with the
+   ember gradient, masked to the border ring only. */
+.stroke-grad {
+  border-color: transparent;
+  background-image: linear-gradient(
+    180deg,
+    #b01f02 0%,
+    #ff3c00 55%,
+    #ff6d00 100%
+  );
+  background-origin: border-box;
+  background-clip: border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition: opacity 0.35s ease;
+}
+/* Some cards carry the stroke on the card itself rather than on a separate
+   overlay, and the card also paints artwork — so the ring is drawn on a
+   pseudo-element instead, inheriting the authored width and radius. */
+.stroke-grad-self {
+  position: relative;
+  border-color: transparent;
+}
+.stroke-grad-self::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  border-width: inherit;
+  border-style: solid;
+  border-color: transparent;
+  background-image: linear-gradient(
+    180deg,
+    #b01f02 0%,
+    #ff3c00 55%,
+    #ff6d00 100%
+  );
+  background-origin: border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* Unselected cards carry the same gradient, held back. */
+.cat[aria-selected='false'] > .stroke-grad {
+  opacity: 0.55;
+}
+.cat[aria-selected='false']:hover > .stroke-grad {
+  opacity: 0.85;
+}
+
+[data-name='desktop'] .cat[data-size='lg'][aria-selected='false'],
+[data-name='desktop'] .cat[data-size='sm'][aria-selected='false'] {
+  height: 114px;
+  width: 114px;
+}
+[data-name='desktop'] .cat[data-size='lg'][aria-selected='true'],
+[data-name='desktop'] .cat[data-size='sm'][aria-selected='true'] {
+  height: 156px;
+  width: 156px;
+}
+[data-name='desktop'] .cat[data-size='lg'][aria-selected='false'] > *:not([aria-hidden]) {
+  transform: scale(0.731);
+}
+[data-name='desktop'] .cat[data-size='sm'][aria-selected='true'] > *:not([aria-hidden]) {
+  transform: scale(1.368);
+}
+
+[data-name='mobile'] .cat[data-size='lg'][aria-selected='false'],
+[data-name='mobile'] .cat[data-size='sm'][aria-selected='false'] {
+  height: 67px;
+  width: 67px;
+}
+[data-name='mobile'] .cat[data-size='lg'][aria-selected='true'],
+[data-name='mobile'] .cat[data-size='sm'][aria-selected='true'] {
+  height: 90px;
+  width: 90px;
+}
+[data-name='mobile'] .cat[data-size='lg'][aria-selected='false'] > *:not([aria-hidden]) {
+  transform: scale(0.744);
+}
+[data-name='mobile'] .cat[data-size='sm'][aria-selected='true'] > *:not([aria-hidden]) {
+  transform: scale(1.343);
+}
+
+/* Authored layout per state: the selected card anchors its artwork to the top
+   of the box, the unselected ones centre theirs. Padding stays as authored
+   (pl-25 / pr-26 / py-8) in both states. */
+.cat[aria-selected='true'] > *:not([aria-hidden]) {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.cat[aria-selected='false'] > *:not([aria-hidden]) {
+  align-items: center;
+  justify-content: center;
+}
+.cat[aria-selected='true'] {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(176, 31, 2, 0.6),
+    rgba(255, 60, 0, 0.6)
+  );
+  filter: drop-shadow(0 0 16px rgba(255, 85, 0, 0.5));
+}
+/* Active card reads at full strength; inactive ones fade back to 50%. */
+.cat[aria-selected='true'] p,
+.cat[aria-selected='true'] img,
+.cat[aria-selected='true'] .opacity-50 {
+  opacity: 1;
+  filter: none;
+}
+.cat[aria-selected='false'] {
+  background-image: none;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.cat[aria-selected='false'] p,
+.cat[aria-selected='false'] img,
+.cat[aria-selected='false'] .opacity-50 {
+  opacity: 0.5;
+}
+.cat p,
+.cat img,
+.cat .opacity-50 {
+  transition:
+    opacity 0.35s ease,
+    filter 0.35s ease;
+}
+.cat:focus-visible {
+  outline: 2px solid #ff8a3d;
+  outline-offset: 3px;
+}
+
+/* ── Chrome that lives outside the scaled design frames ────────────────── */
+@keyframes ember-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.anim-rise {
+  animation: ember-rise 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes ember-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.anim-fade {
+  animation: ember-fade 0.3s ease both;
+}
