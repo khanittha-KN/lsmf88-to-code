@@ -265,6 +265,29 @@ html.is-scrolling::-webkit-scrollbar-thumb {
   scroll-snap-align: center;
 }
 
+/* ── Provider grid ─────────────────────────────────────────────────────────
+   Categories range from 5 providers to 63, so the grid scrolls inside a
+   viewport pinned to the height of the category panel next to it. Without that
+   the section height — and the position of everything below it — would jump
+   every time a category is picked. */
+.provider-scroll {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 85, 0, 0.55) rgba(0, 0, 0, 0.25);
+}
+.provider-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.provider-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+}
+.provider-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff5500, #b01f02);
+  border-radius: 999px;
+}
+
 .tile {
   cursor: pointer;
   transition:
