@@ -17,7 +17,7 @@ import type { MouseEvent } from "react";
 import { CATEGORY_LABELS, useSite, type Category } from "../site/ui";
 import { PROVIDERS, type Provider } from "../site/providers";
 import { PROMOS } from "../site/promos";
-import { FixedFrameLayer } from "../site/frameLayer";
+import { FixedFrameLayer, HeaderBackdrop } from "../site/frameLayer";
 
 /** One delegated handler for the whole provider grid, so 63 tiles do not each
  *  carry their own listener. The tile's aria-label is the provider name. */
@@ -134,12 +134,22 @@ function Frame16() {
 
 function Frame36() {
   return (
+    <>
+    {/* The bar's surface is a viewport-pinned layer of its own, so its blur has
+        no transformed ancestor to defeat it and it keeps covering the gutters
+        the canvas leaves at max scale. The buttons and logo stay in the
+        authored 1440px column above it. */}
+    <HeaderBackdrop
+      backgroundImage="linear-gradient(90deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.42) 100%), linear-gradient(89.9999999315684deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 85, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 100%)"
+      designHeight={100}
+      ruleImage="linear-gradient(90deg, rgba(198,67,2,0.15) 0%, #ff5500 50%, rgba(198,67,2,0.15) 100%)"
+    />
     <FixedFrameLayer>
-    <div className="-translate-x-1/2 absolute backdrop-blur-[10px] content-stretch drop-shadow-[6px_6px_4px_rgba(0,0,0,0.25)] flex flex-col h-[100px] items-center justify-center left-1/2 pl-[62px] pr-[37px] py-[14px] top-0 w-[1440px]" style={{ backgroundImage: "linear-gradient(90deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), linear-gradient(89.9999999315684deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 85, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 100%)" }}>
-      <div aria-hidden className="absolute bottom-0 h-[3px] left-0 pointer-events-none w-full" style={{ backgroundImage: "linear-gradient(90deg, rgba(198,67,2,0.15) 0%, #ff5500 50%, rgba(198,67,2,0.15) 100%)" }} />
+    <div className="-translate-x-1/2 absolute content-stretch flex flex-col h-[100px] items-center justify-center left-1/2 pl-[62px] pr-[37px] py-[14px] top-0 w-[1440px]">
       <Frame16 />
     </div>
     </FixedFrameLayer>
+    </>
   );
 }
 

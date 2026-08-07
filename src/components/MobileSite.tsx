@@ -17,7 +17,7 @@ import type { MouseEvent } from "react";
 import { CATEGORY_LABELS, useSite } from "../site/ui";
 import { PROVIDERS, type Provider } from "../site/providers";
 import { PROMOS } from "../site/promos";
-import { FixedFrameLayer } from "../site/frameLayer";
+import { FixedFrameLayer, HeaderBackdrop } from "../site/frameLayer";
 
 /** One delegated handler for the whole provider grid, so 63 tiles do not each
  *  carry their own listener. The tile's aria-label is the provider name. */
@@ -49,13 +49,16 @@ function Frame49() {
     {/* Keeps the header's space in the column now that the header itself is
         rendered in the fixed layer above the canvas. */}
     <div aria-hidden className="h-[80px] shrink-0 w-full" />
+    {/* The bar's surface is a viewport-pinned layer of its own, so its blur has
+        no transformed ancestor to defeat it; the logo stays in the authored
+        430px column above it. */}
+    <HeaderBackdrop
+      backgroundImage="linear-gradient(90deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.42) 100%), linear-gradient(89.99999997445695deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 85, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 100%)"
+      designHeight={80}
+      ruleImage="linear-gradient(90deg, rgba(198,67,2,0.15) 0%, #ff5500 50%, rgba(198,67,2,0.15) 100%)"
+    />
     <FixedFrameLayer>
-    <div className="drop-shadow-[6px_6px_4px_rgba(0,0,0,0.25)] h-[80px] relative w-full">
-      {/* The bar itself runs to the viewport edges; the logo stays in the
-          authored 430px column. */}
-      <div aria-hidden className="backdrop-blur-[10px] frame-bleed" style={{ backgroundImage: "linear-gradient(90deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), linear-gradient(89.99999997445695deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 85, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 100%)" }}>
-        <div className="absolute bottom-0 h-[3px] left-0 w-full" style={{ backgroundImage: "linear-gradient(90deg, rgba(198,67,2,0.15) 0%, #ff5500 50%, rgba(198,67,2,0.15) 100%)" }} />
-      </div>
+    <div className="h-[80px] relative w-full">
       <div className="flex flex-col items-center justify-center size-full">
         <div className="content-stretch flex flex-col items-center justify-center pl-[62px] pr-[37px] py-[14px] relative size-full">
           <div className="h-[45.195px] relative shrink-0 w-[145px]" data-name="Lsmx84 3">
