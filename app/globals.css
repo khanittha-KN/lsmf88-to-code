@@ -272,9 +272,20 @@ html.is-scrolling::-webkit-scrollbar-thumb {
    every time a category is picked. */
 .provider-scroll {
   overflow-y: auto;
+  /* Explicit, because `visible` computes to `auto` next to an `auto` sibling
+     axis — which is how a stray sideways scrollbar appeared under the grid. */
+  overflow-x: hidden;
+  /* Reserve the scrollbar's width in layout so it cannot squeeze the columns
+     into overflowing sideways. */
+  scrollbar-gutter: stable;
   overscroll-behavior: contain;
+  /* Rows come to rest on their own top edge, so a row is never left half cut. */
+  scroll-snap-type: y proximity;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 85, 0, 0.55) rgba(0, 0, 0, 0.25);
+}
+.provider-scroll [data-name='game cover'] {
+  scroll-snap-align: start;
 }
 .provider-scroll::-webkit-scrollbar {
   width: 6px;

@@ -11,6 +11,8 @@ import {
   type ReactNode,
 } from 'react'
 
+import { PROMO_COUNT, PROMO_INTERVAL_MS } from './promos'
+
 export type AuthMode = 'login' | 'register'
 export type Category = 'slot' | 'casino' | 'sport' | 'lotto'
 
@@ -66,13 +68,19 @@ export function SiteProvider({ children }: { children: ReactNode }) {
   const openAuth = useCallback((mode: AuthMode) => setAuth(mode), [])
   const closeAuth = useCallback(() => setAuth(null), [])
 
-  // Promotion banner advances on its own; the dots below it stay in sync.
+  /* Promotion banner advances on its own; the dots, the thumbnail strip and the
+     detail panel all read the same index, so they stay in step. Depending on
+     `promoSlide` restarts the timer whenever a dot or thumbnail is clicked, so a
+     manual pick gets a full interval before it moves on. Nothing to rotate below
+     two promotions, and a reader who asked for less motion gets none. */
   useEffect(() => {
-    const id = window.setInterval(() => {
-      setPromoSlide((i) => (i + 1) % 4)
-    }, 5000)
-    return () => window.clearInterval(id)
-  }, [])
+    if (PROMO_COUNT < 2) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const id = window.setTimeout(() => {
+      setPromoSlide((i) => (i + 1) % PROMO_COUNT)
+    }, PROMO_INTERVAL_MS)
+    return () => window.clearTimeout(id)
+  }, [promoSlide])
 
   useEffect(() => {
     if (!auth) return

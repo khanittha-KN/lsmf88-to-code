@@ -1,12 +1,9 @@
 "use client"
 
 import svgPaths from "../imports/Mobile/svg-5nwsri0t06";
-const imgMobile = "/images/mobile/282b1bda21fdeccaf213496b233dc02778594c64.png";
-const imgFrame1000009303 = "/images/mobile/6ef1991cd065d3bb86bffbbbf73385605ea5346a.png";
 const imgImg43013 = "/images/mobile/cb73c9c324750aedd5e6d312174b22f86ce0d84a.png";
 const imgLsmx843 = "/images/mobile/8b0d7e6e956cebe931b06657bd48cdae0632d714.png";
 const imgRectangle6509 = "/images/mobile/2acf85d97d1e6f2e7b331d2679baead9d42e4078.png";
-const imgFrame1618873365 = "/images/mobile/586b06c31b94b13bed5cdeaf42be53e2ca00a215.png";
 const imgGeminiGeneratedImageYkhxbvykhxbvykhx1 = "/images/mobile/ed440263332714a989e2f9516f0c32124a2fa355.png";
 const imgImage1 = "/images/mobile/64bd1d10101135a9dcf8fd2cff585f49609381c6.png";
 const imgImage2 = "/images/mobile/11f42dafd7521d576c514b4d322be0eb87b65dd8.png";
@@ -19,6 +16,7 @@ const imgImg42863 = "/images/mobile/5edc1598151847756895c907fb403c1410b16b69.png
 import type { MouseEvent } from "react";
 import { CATEGORY_LABELS, useSite } from "../site/ui";
 import { PROVIDERS, type Provider } from "../site/providers";
+import { PROMOS } from "../site/promos";
 import { FixedFrameLayer } from "../site/frameLayer";
 
 /** One delegated handler for the whole provider grid, so 63 tiles do not each
@@ -35,13 +33,9 @@ function useGameGridClick() {
 
 function Frame46() {
   return (
+    // No backdrop of its own — the hero reads against the site-wide fixed
+    // background (see site/PageBackground), which carries this same plate.
     <div className="-translate-x-1/2 absolute h-[1024px] left-1/2 overflow-clip top-0 w-[430px]">
-      {/* Hero background (version 3) — opaque, so it covers the page background
-          entirely across the hero. */}
-      <div aria-hidden className="absolute bg-black inset-0 pointer-events-none">
-        <img alt="" className="absolute anim-drift-opaque max-w-none object-cover size-full" src={imgFrame1000009303} />
-        <div className="absolute inset-0" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 430 1024' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='0.699999988079071'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(28.7 54.15 -68.932 36.534 126 482.5)'><stop stop-color='rgba(21,14,4,1)' offset='0'/><stop stop-color='rgba(21,14,4,0)' offset='0.8779'/></radialGradient></defs></svg>\")" }} />
-      </div>
       <div className="absolute anim-float h-[547px] left-[-19px] shadow-[9px_8px_25.4px_0px_rgba(0,0,0,0.5)] top-[427px] w-[469px]" data-name="IMG_4301 3">
         <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImg43013} />
       </div>
@@ -71,6 +65,12 @@ function Frame49() {
           </div>
         </div>
       </div>
+    </div>
+    {/* The account buttons stay at their authored y — below the bar, not inside
+        it — but ride the pinned layer so they never scroll out of reach. The
+        column keeps a spacer of the same height where they used to sit. */}
+    <div className="absolute flex justify-center left-0 top-[112px] w-full">
+      <Frame26 />
     </div>
     </FixedFrameLayer>
     </>
@@ -155,19 +155,20 @@ function Frame26() {
 function Frame27() {
   return (
     <div className="content-stretch flex flex-col gap-[16px] items-center relative shrink-0 w-full">
-      <p className="[word-break:break-word] font-['IBM_Plex_Sans_Thai:Bold',sans-serif] leading-[normal] min-w-full not-italic relative shrink-0 text-[#fafafa] text-[20px] text-center w-[min-content]">“การเดิมพันออนไลน์ที่ทันสมัยที่สุดกับ”</p>
+      {/* The wordmark below is decorative artwork, so the page's only h1 carries
+          the brand as real text. */}
+      <h1 className="[word-break:break-word] font-['IBM_Plex_Sans_Thai:Bold',sans-serif] leading-[1.5] min-w-full not-italic relative shrink-0 text-[#fafafa] text-[19px] text-center w-[min-content]">
+        LSMF88 ครบทุกจังหวะเดิมพัน ด้วยระบบที่คิดมาเหนือกว่า
+      </h1>
       <div className="anim-glow h-[90px] relative shrink-0 w-[287px]" data-name="lsm99ai ตังจริง+ 1">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <img alt="" className="absolute h-[99.96%] left-[0.05%] max-w-none top-[0.17%] w-[99.93%]" src={imgLsmx843} />
         </div>
       </div>
-      <div className="[word-break:break-word] font-['Sukhumvit_Set:Light',sans-serif] leading-[0] min-w-full not-italic relative shrink-0 text-[#fafafa] text-[0px] text-center w-[min-content]">
-        <p className="font-['IBM_Plex_Sans_Thai:Medium',sans-serif] mb-0 text-[12px]">
-          <span className="leading-[2.03]">{`ยินดีต้อนรับสู่โลกแห่งการเดิมพันออนไลน์ที่ล้ำสมัยกว่ากับ `}</span>
-          <span className="leading-[2.03] text-[#ff6d00]">LSMF88</span>
-        </p>
-        <p className="font-['IBM_Plex_Sans_Thai:Medium',sans-serif] leading-[2.03] text-[12px]">ที่นี่คือจุดหมายปลายทางสำหรับนักเดิมพันที่ต้องการสัมผัสประสบการณ์สุดพิเศษ</p>
-      </div>
+      <p className="[word-break:break-word] font-['IBM_Plex_Sans_Thai:Medium',sans-serif] leading-[1.85] min-w-full not-italic relative shrink-0 text-[#fafafa] text-[12px] text-center w-[min-content]">
+        <span className="text-[#ff6d00]">LSMF88</span>
+        {` รวมบรรยากาศคาสิโนออนไลน์และเกมเดิมพันยอดนิยมไว้ในพื้นที่เดียว พร้อมระบบที่ตอบสนองรวดเร็ว เพื่อมอบความสนุกแบบพรีเมียมให้ผู้เล่นทุกสไตล์`}
+      </p>
     </div>
   );
 }
@@ -175,7 +176,9 @@ function Frame27() {
 function Frame50() {
   return (
     <div className="content-stretch flex flex-col gap-[40px] items-center relative shrink-0 w-[411px]">
-      <Frame26 />
+      {/* Holds the account buttons' place; they are rendered in the pinned
+          layer (see Frame49) so they stay put while the page scrolls. */}
+      <div aria-hidden className="h-[44px] shrink-0 w-full" />
       <Frame27 />
     </div>
   );
@@ -193,10 +196,10 @@ function Frame67() {
 function Frame34() {
   return (
     <div className="[word-break:break-word] content-stretch flex flex-col gap-[4px] items-start min-w-0 not-italic relative shrink w-full">
-      <p className="font-['IBM_Plex_Sans_Thai:Bold',sans-serif] leading-[normal] relative shrink-0 text-[#ff6d00] text-[14px] w-full">ฝากถอนออโต้</p>
+      <h3 className="font-['IBM_Plex_Sans_Thai:Bold',sans-serif] leading-[1.35] relative shrink-0 text-[#ff6d00] text-[12px] w-full">ธุรกรรมออโต้ทันใจ</h3>
       <div className="font-['IBM_Plex_Sans_Thai:Medium',sans-serif] leading-[0] relative shrink-0 text-[10px] text-white w-full">
-        <p className="leading-[normal] mb-0">ฝาก-ถอน ออโต้ 3 วินาที</p>
-        <p className="leading-[normal]">เจ้าเดียวในไทยระบบใหม่ล่าสุด!</p>
+        <p className="leading-[normal] mb-0">ฝากและถอนเสร็จไวภายใน 3 วินาที</p>
+        <p className="leading-[normal]">ระบบทำงานคล่อง ลดขั้นตอนการรอ</p>
       </div>
     </div>
   );
@@ -207,8 +210,8 @@ function Frame59() {
     /* Width is the 274px badge minus this row's own offset and a right inset
        that clears the plate's angled corner, so the copy wraps inside the
        artwork instead of running past its edge. */
-    <div className="col-1 content-stretch flex gap-[8px] items-center h-[57.705px] ml-[33.89px] mt-[14.43px] relative row-1 w-[226px]">
-      <div className="relative shrink-0 size-[80px]">
+    <div className="absolute content-stretch flex gap-[8px] inset-0 items-center pl-[16px] pr-[12px]">
+      <div className="relative shrink-0 size-[48px]">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <img alt="" className="absolute h-[157.58%] left-[-183.37%] max-w-none top-[-22.78%] w-[288.89%]" src={imgRectangle6509} />
         </div>
@@ -245,16 +248,16 @@ function Group251() {
 function Frame35() {
   return (
     <div className="[word-break:break-word] content-stretch flex flex-col gap-[4px] items-start leading-[normal] min-w-0 not-italic relative shrink w-full">
-      <p className="font-['IBM_Plex_Sans_Thai:Bold',sans-serif] relative shrink-0 text-[#ff6d00] text-[14px] w-full">บริการ 24 ชม.</p>
-      <p className="font-['IBM_Plex_Sans_Thai:Medium',sans-serif] relative shrink-0 text-[10px] text-white w-full">พร้อมให้บริการตลอด 24 ชั่วโมง รับรองความปลอดภัย</p>
+      <h3 className="font-['IBM_Plex_Sans_Thai:Bold',sans-serif] leading-[1.35] relative shrink-0 text-[#ff6d00] text-[12px] w-full">ดูแลต่อเนื่อง 24 ชม.</h3>
+      <p className="font-['IBM_Plex_Sans_Thai:Medium',sans-serif] relative shrink-0 text-[10px] text-white w-full">ทีมบริการพร้อมช่วยเหลือตลอดทั้งวัน ทุกการใช้งานได้รับการดูแลอย่างมั่นใจ</p>
     </div>
   );
 }
 
 function Frame60() {
   return (
-    <div className="col-1 content-stretch flex gap-[8px] items-center h-[57.705px] ml-[26.68px] mt-[14.43px] relative row-1 w-[233px]">
-      <div className="relative shrink-0 size-[80px]">
+    <div className="absolute content-stretch flex gap-[8px] inset-0 items-center pl-[16px] pr-[12px]">
+      <div className="relative shrink-0 size-[48px]">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <img alt="" className="absolute h-[157.58%] left-[-6.66%] max-w-none top-[-28.87%] w-[288.89%]" src={imgRectangle6509} />
         </div>
@@ -291,16 +294,16 @@ function Group252() {
 function Frame36() {
   return (
     <div className="[word-break:break-word] content-stretch flex flex-col gap-[4px] items-start leading-[normal] min-w-0 not-italic relative shrink w-full">
-      <p className="font-['IBM_Plex_Sans_Thai:Bold',sans-serif] relative shrink-0 text-[#ff6d00] text-[14px] w-full">ถอนไม่จำกัด</p>
-      <p className="font-['IBM_Plex_Sans_Thai:Medium',sans-serif] relative shrink-0 text-[10px] text-white w-full">ถอนได้ไม่จำกัดต่อวันรวดเร็วทันใจ</p>
+      <h3 className="font-['IBM_Plex_Sans_Thai:Bold',sans-serif] leading-[1.35] relative shrink-0 text-[#ff6d00] text-[12px] w-full">ถอนสะดวกทุกยอด</h3>
+      <p className="font-['IBM_Plex_Sans_Thai:Medium',sans-serif] relative shrink-0 text-[10px] text-white w-full">ทำรายการถอนได้อย่างคล่องตัวทุกวัน รวดเร็ว ไม่สะดุดในทุกธุรกรรม</p>
     </div>
   );
 }
 
 function Frame61() {
   return (
-    <div className="col-1 content-stretch flex gap-[8px] items-center h-[57.705px] ml-[22.35px] mt-[15.87px] relative row-1 w-[237px]">
-      <div className="relative shrink-0 size-[80px]">
+    <div className="absolute content-stretch flex gap-[8px] inset-0 items-center pl-[16px] pr-[12px]">
+      <div className="relative shrink-0 size-[48px]">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <img alt="" className="absolute h-[191.19%] left-[-125.41%] max-w-none top-[-45%] w-[350.52%]" src={imgRectangle6509} />
         </div>
@@ -490,12 +493,11 @@ function Group244() {
 }
 
 function Frame63() {
+  const { promoSlide } = useSite();
+  const promo = PROMOS[promoSlide] ?? PROMOS[0];
   return (
     <div className="h-[221px] relative rounded-[8px] shrink-0 w-full">
-      <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[8px] size-full" src={imgFrame1618873365} />
-      <div className="flex flex-row items-center justify-center size-full">
-        <div className="relative size-full" />
-      </div>
+      <img alt={promo.title} className="anim-fade absolute inset-0 max-w-none object-cover pointer-events-none rounded-[8px] size-full" key={promo.id} src={promo.image} />
       <div aria-hidden className="absolute stroke-grad border-[2.5px] border-[#c64302] border-solid inset-0 pointer-events-none rounded-[8px]" />
     </div>
   );
@@ -505,50 +507,25 @@ function Frame64() {
   const { promoSlide, setPromoSlide } = useSite();
   return (
     <div aria-label="เลือกโปรโมชั่น" className="content-stretch flex gap-[3px] items-center relative shrink-0 w-full" role="tablist">
-      <div
-        aria-selected={promoSlide === 0}
-        className="cursor-pointer relative shrink-0 size-[6px] transition-transform duration-300"
-        onClick={() => setPromoSlide(0)}
-        role="tab"
-        style={{ transform: promoSlide === 0 ? "scale(1.35)" : "scale(1)" }}
-      >
-        <svg className="absolute block inset-0 size-full" fill="none" height="6" preserveAspectRatio="none" viewBox="0 0 6 6" width="6">
-          <circle cx="3" cy="3" fill={promoSlide === 0 ? "#FF6D00" : "#F18C22"} fillOpacity={promoSlide === 0 ? 1 : 0.5} r="3" />
-        </svg>
-      </div>
-      <div
-        aria-selected={promoSlide === 1}
-        className="cursor-pointer relative shrink-0 size-[6px] transition-transform duration-300"
-        onClick={() => setPromoSlide(1)}
-        role="tab"
-        style={{ transform: promoSlide === 1 ? "scale(1.35)" : "scale(1)" }}
-      >
-        <svg className="absolute block inset-0 size-full" fill="none" height="6" preserveAspectRatio="none" viewBox="0 0 6 6" width="6">
-          <circle cx="3" cy="3" fill={promoSlide === 1 ? "#FF6D00" : "#F18C22"} fillOpacity={promoSlide === 1 ? 1 : 0.5} r="3" />
-        </svg>
-      </div>
-      <div
-        aria-selected={promoSlide === 2}
-        className="cursor-pointer relative shrink-0 size-[6px] transition-transform duration-300"
-        onClick={() => setPromoSlide(2)}
-        role="tab"
-        style={{ transform: promoSlide === 2 ? "scale(1.35)" : "scale(1)" }}
-      >
-        <svg className="absolute block inset-0 size-full" fill="none" height="6" preserveAspectRatio="none" viewBox="0 0 6 6" width="6">
-          <circle cx="3" cy="3" fill={promoSlide === 2 ? "#FF6D00" : "#F18C22"} fillOpacity={promoSlide === 2 ? 1 : 0.5} r="3" />
-        </svg>
-      </div>
-      <div
-        aria-selected={promoSlide === 3}
-        className="cursor-pointer relative shrink-0 size-[6px] transition-transform duration-300"
-        onClick={() => setPromoSlide(3)}
-        role="tab"
-        style={{ transform: promoSlide === 3 ? "scale(1.35)" : "scale(1)" }}
-      >
-        <svg className="absolute block inset-0 size-full" fill="none" height="6" preserveAspectRatio="none" viewBox="0 0 6 6" width="6">
-          <circle cx="3" cy="3" fill={promoSlide === 3 ? "#FF6D00" : "#F18C22"} fillOpacity={promoSlide === 3 ? 1 : 0.5} r="3" />
-        </svg>
-      </div>
+      {PROMOS.map((promo, index) => (
+        <div
+          aria-label={promo.title}
+          aria-selected={promoSlide === index}
+          className="cursor-pointer relative shrink-0 size-[6px] transition-transform duration-300"
+          key={promo.id}
+          onClick={() => setPromoSlide(index)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") setPromoSlide(index);
+          }}
+          role="tab"
+          style={{ transform: promoSlide === index ? "scale(1.35)" : "scale(1)" }}
+          tabIndex={0}
+        >
+          <svg className="absolute block inset-0 size-full" fill="none" height="6" preserveAspectRatio="none" viewBox="0 0 6 6" width="6">
+            <circle cx="3" cy="3" fill={promoSlide === index ? "#FF6D00" : "#F18C22"} fillOpacity={promoSlide === index ? 1 : 0.5} r="3" />
+          </svg>
+        </div>
+      ))}
     </div>
   );
 }
@@ -561,30 +538,25 @@ function Frame40() {
   );
 }
 
+/** Detail panel for whichever promotion is showing. */
 function Frame45() {
+  const { promoSlide } = useSite();
+  const promo = PROMOS[promoSlide] ?? PROMOS[0];
   return (
     <div className="h-[228.808px] overflow-clip relative shrink-0 w-[342.07px]">
-      <div className="[word-break:break-word] absolute font-['Sukhumvit_Set:Bold',sans-serif] h-[234px] leading-[0] left-[calc(50%-166.55px)] not-italic text-[#060a0e] text-[0px] top-[0.4px] w-[334px] whitespace-pre-wrap">
-        <p className="font-['IBM_Plex_Sans_Thai:Regular',sans-serif] leading-[12px] mb-0 text-[#fafafa] text-[12px]">{`มวยเดี่ยว ที่มีการเเทงถูกติดต่อกัน 5 คู่  หรือ เเทงผิดติดต่อกัน 5 คู่  `}</p>
-        <p className="leading-[12px] mb-0 text-[12px]">​</p>
-        <p className="font-['IBM_Plex_Sans_Thai:Regular',sans-serif] leading-[12px] mb-0 text-[#fafafa] text-[12px]">{`บอลเดี่ยว ที่มีการเเทงถูกติดต่อกัน 5 คู่ หรือ เเทงผิดติดต่อกัน 5 คู่  `}</p>
-        <p className="leading-[12px] mb-0 text-[12px]">​</p>
-        <p className="font-['IBM_Plex_Sans_Thai:Regular',sans-serif] leading-[12px] mb-0 text-[#fafafa] text-[12px]">{`สามารถเเคปบิลเเจ้งแอดมินผ่านไลน์เพื่อรับโบนัสได้ ทันที 1,000 บาท `}</p>
-        <p className="leading-[12px] mb-0 text-[12px]">​</p>
-        <p className="font-['IBM_Plex_Sans_Thai:Regular',sans-serif] leading-[12px] mb-0 text-[#fafafa] text-[12px]">(บิลขั้นต่ำ 200 บาท ขึ้นไป)</p>
-        <p className="leading-[12px] mb-0 text-[12px]">​</p>
-        <p className="font-['IBM_Plex_Sans_Thai:Regular',sans-serif] leading-[12px] mb-0 text-[12px]">{` `}</p>
-        <p className="leading-[12px] mb-0 text-[12px]">​</p>
-        <p className="font-['IBM_Plex_Sans_Thai:Regular',sans-serif] leading-[12px] mb-0 text-[#ff6d00] text-[12px]">**เงื่อนไข</p>
-        <p className="leading-[12px] mb-0 text-[12px]">​</p>
-        <p className="font-['IBM_Plex_Sans_Thai:Regular',sans-serif] leading-[12px] mb-0 text-[#fafafa] text-[12px]">- บอลเดี่ยวต้องมีค่าน้ำ 0.75 ขึ้นไป ไม่ต่ำกว่า -0.75 เท่านั้น</p>
-        <p className="leading-[12px] mb-0 text-[12px]">​</p>
-        <p className="font-['IBM_Plex_Sans_Thai:Regular',sans-serif] leading-[12px] mb-0 text-[#fafafa] text-[12px]">- มวยเดี่ยวต้องมีค่าน้ำ 0.60 ขึ้นไป ไม่ต่ำกว่า -0.60 เท่านั้น</p>
-        <p className="leading-[12px] mb-0 text-[12px]">​</p>
-        <p className="font-['IBM_Plex_Sans_Thai:Regular',sans-serif] leading-[12px] mb-0 text-[#fafafa] text-[12px]">- มวยต้องเป็นมวยก่อนชกเท่านั้น ไม่นับรวม สูง/ต่ำ ทั้ง 5 คู่</p>
-        <p className="leading-[12px] mb-0 text-[12px]">​</p>
-        <p className="font-['IBM_Plex_Sans_Thai:Regular',sans-serif] leading-[12px] mb-0 text-[#fafafa] text-[12px]">{`- กีฬาต้องแทงก่อนการแข่งขัน เต็มเวลาเท่านั้น (HDP) ทั้ง 5 คู่ `}</p>
-        <p className="leading-[12px] text-[12px]">​</p>
+      <div className="anim-fade [word-break:break-word] absolute left-0 not-italic top-0 w-[342px]" key={promo.id}>
+        {promo.details.map((line, index) =>
+          line.text === "" ? (
+            <div aria-hidden className="h-[8px]" key={index} />
+          ) : (
+            <p
+              className={`font-['IBM_Plex_Sans_Thai:Regular',sans-serif] leading-[1.5] mb-[6px] text-[11px] ${line.accent ? "text-[#ff6d00]" : "text-[#fafafa]"}`}
+              key={index}
+            >
+              {line.text}
+            </p>
+          ),
+        )}
       </div>
     </div>
   );
@@ -921,7 +893,7 @@ function ProviderTile({ provider }: { provider: Provider }) {
   return (
     <div
       aria-label={provider.name}
-      className="stroke-grad-self bg-gradient-to-b border-[1.643px] border-[#121525] border-solid from-[16%] from-[rgba(18,21,37,0)] h-[144px] overflow-clip relative rounded-[8.364px] tile to-[#121525] w-[120px]"
+      className="stroke-grad-self bg-gradient-to-b border-[1.643px] border-[#121525] border-solid from-[16%] from-[rgba(18,21,37,0)] h-[127px] overflow-clip relative rounded-[8.364px] tile to-[#121525] w-[106px]"
       data-name="game cover"
       role="button"
       tabIndex={0}
@@ -944,11 +916,17 @@ function Frame31() {
   const onGridClick = useGameGridClick();
   return (
     <div
-      className="anim-fade provider-scroll h-[392px] relative shrink-0 w-[386px]"
+      className="anim-fade provider-scroll h-[413px] relative shrink-0 w-[382px]"
       key={category}
       onClick={onGridClick}
     >
-      <div className="gap-[16px] grid grid-cols-[repeat(3,120px)] pb-[8px] pr-[10px]">
+      {/* 382px wide to match the category panel above it. Exactly three rows
+          tall — 3x127 plus two 16px gaps. The card comes down from the authored
+          120x144 to 106x127 (same 5:6) because the sections below sit at fixed
+          offsets and three full rows at the authored size overran the next one
+          by 40px. `justify-between` spreads the three columns to both edges so
+          the grid lines up with the panel rather than sitting narrower. */}
+      <div className="gap-y-[16px] grid grid-cols-[repeat(3,106px)] justify-between">
         {PROVIDERS[category].map((provider) => (
           <ProviderTile key={provider.id} provider={provider} />
         ))}
@@ -1010,9 +988,7 @@ function Frame33() {
         <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgLsmx843} />
       </div>
       <div className="[word-break:break-word] font-['IBM_Plex_Sans_Thai:Light',sans-serif] leading-[0] min-w-full not-italic relative shrink-0 text-[#fafafa] text-[12px] text-center w-[min-content]">
-        <p className="leading-[2.055] mb-0">LSMF88 ศูนย์รวมเว็บพนันออนไลน์ทุกชนิด ฝาก-ถอนด้วยระบบ</p>
-        <p className="leading-[2.055] mb-0">ออโต้ทำรายการไม่กี่วินาที พร้อมรูปแบบการเล่นง่าย สมัครง่ายในไม่กี่ขั้น</p>
-        <p className="leading-[2.055]">ตอนบริการด้วยระบบออนไลน์มาตรฐานสากล เท่าไหร่ก็จ่าย</p>
+        <p className="leading-[2.055]">LSMF88 รวบรวมเกมคาสิโนและการเดิมพันหลากหลายประเภทไว้ครบในแพลตฟอร์มเดียว พร้อมระบบธุรกรรมอัตโนมัติที่ทำงานรวดเร็ว ขั้นตอนไม่ซับซ้อน และรองรับการใช้งานได้อย่างคล่องตัวตลอดวัน</p>
       </div>
       <Group233 />
     </div>
@@ -1030,13 +1006,15 @@ function Frame52() {
 
 function Frame76() {
   return (
-    <div className="[word-break:break-word] col-1 content-stretch flex flex-col font-['IBM_Plex_Sans_Thai:Bold',sans-serif] items-start leading-[normal] ml-0 mt-[153px] not-italic relative row-1 text-[40px] w-[190px]">
-      <p className="mb-[-20px] min-w-full relative shrink-0 text-[#fafafa] w-[min-content]">ทำไม ?</p>
-      <p className="mb-[-20px] min-w-full relative shrink-0 text-[#fafafa] w-[min-content]">ต้องเลือก</p>
-      <p className="bg-clip-text relative shrink-0 text-[transparent] text-shadow-[0px_0px_27.4px_rgba(191,82,0,0.6)] w-[159px]" style={{ backgroundImage: "linear-gradient(-84.02693970851206deg, rgb(176, 31, 2) 3.483%, rgb(255, 109, 0) 50.463%, rgb(176, 31, 2) 97.442%)" }}>
-        LSMF88
-      </p>
-    </div>
+    /* Three display lines as authored, sized down from 40px: the copy they now
+       carry is a full sentence and the column is only 190px wide. */
+    <h2 className="[word-break:break-word] col-1 content-stretch flex flex-col font-['IBM_Plex_Sans_Thai:Bold',sans-serif] items-start leading-[1.5] ml-0 mt-[176px] not-italic relative row-1 w-[190px]">
+      <span className="min-w-full relative shrink-0 text-[#fafafa] text-[21px] w-[min-content]">คาสิโนออนไลน์ที่ดี</span>
+      <span className="min-w-full relative shrink-0 text-[#fafafa] text-[24px] w-[min-content]">ต้องครบมากกว่า</span>
+      <span className="bg-clip-text relative shrink-0 text-[28px] text-[transparent] text-shadow-[0px_0px_27.4px_rgba(191,82,0,0.6)] w-full" style={{ backgroundImage: "linear-gradient(-84.02693970851206deg, rgb(225, 243, 52) 3.483%, rgb(255, 171, 0, 1) 50.463%, rgb(225, 243, 52) 97.442%)" }}>
+        แค่จำนวนเกม
+      </span>
+    </h2>
   );
 }
 
@@ -1048,7 +1026,7 @@ function Group261() {
         <div className="-scale-y-100 flex-none rotate-180">
           <div className="h-[307px] relative w-[218px]" data-name="IMG_4286 3">
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <img alt="" className="absolute h-[153.51%] left-[-18.11%] max-w-none top-[0.08%] w-[143.84%]" src={imgImg42863} />
+              <img alt="" className="absolute h-[153.51%] left-[-25%] max-w-none top-[0.08%] w-[143.84%]" src={imgImg42863} />
             </div>
           </div>
         </div>
@@ -1071,17 +1049,12 @@ function Frame48() {
     <div className="h-[249px] relative rounded-[8px] shrink-0 w-full" style={{ backgroundImage: "linear-gradient(-0.4610251767186355deg, rgba(255, 85, 0, 0.6) 43.509%, rgba(0, 0, 0, 0.48) 158.64%)" }}>
       <div className="flex flex-row items-center justify-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex items-center justify-center pl-[70px] pr-[72px] py-[24px] relative size-full">
-          <div className="[word-break:break-word] font-['IBM_Plex_Sans_Thai:Regular',sans-serif] h-[214px] leading-[0] not-italic relative shrink-0 text-[#fafafa] text-[0px] w-[344px] whitespace-pre-wrap">
-            <p className="font-['IBM_Plex_Sans_Thai:Medium',sans-serif] leading-[normal] mb-0 text-[#ff6d00] text-[14px]">ทำไมคุณควรตัดสินใจเลือกเรา ?</p>
-            <p className="leading-[normal] mb-0 text-[14px]">​</p>
-            <p className="leading-[normal] mb-0 text-[14px]">เว็บคาสิโนออนไลน์ที่ครองใจผู้เล่นทั่วโลก ไม่ใช่แค่ประเทศจีน</p>
-            <p className="leading-[normal] mb-0 text-[14px]">{`ด้วยมาตรฐานระดับโลก เทคโนโลยี และการบริการดีที่สุด `}</p>
-            <p className="leading-[normal] mb-0 text-[14px]">ไร้ปัญหา ให้บริการครบทั้ง dg บาคาร่าออนไลน์ ไฮโล เสือมังกร</p>
-            <p className="leading-[normal] mb-0 text-[14px]">{` รูเล็ต หรือ โป๊กเกอร์ บริษัทพัฒนาต่อเนื่องรวดเร็ว มั่นคง `}</p>
-            <p className="leading-[normal] mb-0 text-[14px]">พร้อมการ ใช้งาน ผ่าน Casino App ยิ่งตอกย้ำ ความเป็นเจ้า</p>
-            <p className="leading-[normal] mb-0 text-[14px]">ตลาดของ เกมคาสิโน ภาพ Full HD ได้ประสบการณ์พร้อมกับ</p>
-            <p className="leading-[normal] text-[14px]">สนุกทุกที่และลุ้นโชค ไปกับเกมส์ของเรา</p>
-          </div>
+          {/* One flowing paragraph now, instead of the export's hand-broken lines —
+              the copy wraps to the 344px column on its own. */}
+          <p className="[word-break:break-word] font-['IBM_Plex_Sans_Thai:Medium',sans-serif] leading-[1.7] not-italic relative shrink-0 text-[#fafafa] text-[13px] w-[344px]">
+            <span className="text-[#ff6d00]">LSMF88</span>
+            {` คัดสรรเกมคาสิโนและการเดิมพันยอดนิยมมาไว้ในระบบเดียว ครบทั้งบาคาร่า ไฮโล เสือมังกร รูเล็ต และโป๊กเกอร์ พร้อมโครงสร้างการใช้งานที่ตอบสนองไวและมีเสถียรภาพ รองรับ Casino App และภาพระดับ Full HD ให้ทุกจังหวะเกมคมชัด ใช้งานได้สะดวกจากทุกอุปกรณ์`}
+          </p>
         </div>
       </div>
       <div aria-hidden className="absolute stroke-grad border-[2.5px] border-[#c64302] border-solid inset-0 pointer-events-none rounded-[8px]" />
@@ -1101,13 +1074,12 @@ function Frame44() {
 export default function MobileSite() {
   return (
     <div className="h-[3289px] overflow-clip relative w-[430px]" data-name="mobile">
-      <div aria-hidden className="absolute inset-0 pointer-events-none">
-        <div className="absolute bg-black inset-0" />
-        <img alt="" className="absolute inset-0 max-w-none object-center object-cover size-full" src={imgMobile} />
-        <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(180deg, rgba(5,3,2,0.35) 0%, rgba(5,3,2,0.12) 35%, rgba(5,3,2,0.45) 100%)" }} />
-      </div>
+      {/* The page background lives in a viewport-fixed layer behind the canvas
+          (see site/PageBackground) so it also covers the gutters this frame
+          leaves once the canvas hits its maximum scale. */}
       <Frame46 />
-      <div className="-translate-x-1/2 absolute flex h-[161px] items-center justify-center left-1/2 top-[928px] w-[430px]">
+      {/* Blurred band that seats the feature badges against the hero. */}
+      <div aria-hidden className="-translate-x-1/2 absolute flex h-[161px] items-center justify-center left-1/2 pointer-events-none top-[928px] w-[430px]">
         <div className="-rotate-90 flex-none">
           <div className="bg-[#160d01] blur-[35px] h-[430px] relative w-[161px]" />
         </div>

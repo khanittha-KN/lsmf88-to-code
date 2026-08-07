@@ -5,6 +5,7 @@ import DesktopSite from './components/DesktopSite'
 import MobileSite from './components/MobileSite'
 import Chrome from './site/Chrome'
 import DesignFrame from './site/DesignFrame'
+import PageBackground from './site/PageBackground'
 import { SiteProvider, useScrollReveal } from './site/ui'
 
 /** Authored bounds of the two imported Figma frames. */
@@ -36,6 +37,7 @@ function Site() {
 
   return (
     <div className="min-h-screen w-full bg-ash-950">
+      <PageBackground />
       {isDesktop ? (
         <DesignFrame designHeight={DESKTOP_HEIGHT} designWidth={DESKTOP_WIDTH} maxScale={1.35}>
           <DesktopSite />

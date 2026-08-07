@@ -4,9 +4,9 @@ import './globals.css'
 // Mirrors .figma/make/site.json, previously applied by the Vite
 // figma-site-configuration plugin via transformIndexHtml.
 export const metadata: Metadata = {
-  title: 'Figma Make App',
+  title: 'lsmf88 คาสิโนออนไลน์ครบเครื่อง เดิมพันได้ทุกสไตล์',
   description:
-    'Transform Figma designs into responsive, pixel-perfect websites with animations and interactive prototypes, enhancing user engagement and design fidelity.',
+    'lsmf88 รวบรวมคาสิโนออนไลน์และเกมเดิมพันหลากหลายไว้ครบ ระบบตอบสนองไว เมนูใช้งานคล่อง รองรับความสนุกได้บนทุกอุปกรณ์',
   robots: {
     index: false,
     follow: false,
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="th">
       <body>{children}</body>
     </html>
   )
